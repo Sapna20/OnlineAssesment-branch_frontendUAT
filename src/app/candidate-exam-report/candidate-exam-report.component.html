@@ -1,0 +1,132 @@
+<div class="container pt-4" >
+    <mdb-card>
+        <mdb-card-header>
+            {{performanceData.firstName}}{{performanceData.lastName}} 
+            <p class="text-muted"> {{performanceData.email}} </p>
+            <button (click)="toggle()"> {{showHideButtonName}} </button>
+        </mdb-card-header>
+
+        <mdb-card-body *ngIf = "isShowData">
+            <div class="row">
+                <div class="col">
+                    <p><strong> First Name: </strong>{{performanceData.firstName}}</p> 
+                    <p><strong> Last Name: </strong>{{performanceData.lastName}}</p>
+                    <p><strong> Gender: </strong>{{performanceData.gender}}</p>
+                    <p><strong> DOB: </strong>{{performanceData.dob}}</p>
+                    
+                </div>
+                <div class="col">
+                    <p><strong> Email: </strong>{{performanceData.email}}</p> 
+                    <p><strong> Contact no.: </strong>{{performanceData.contact}}</p>
+                    <p><strong> Country: </strong>{{performanceData.country}}</p>  
+                </div>
+            </div>
+        </mdb-card-body>
+    </mdb-card>
+
+    <div class="pt-4">
+        <mdb-card >
+            <mdb-card-header class="text-center">
+                Summary
+            </mdb-card-header>
+            <mdb-card-body>
+                <div class="row">
+                    <div class="col-4">
+                        <h5>Marks Scored: </h5><h3>{{performanceData.totalMarks}}/{{performanceData.totalTestMarks}}</h3>
+                        <br>
+                        <p>Total No. of Questions : {{performanceData.totalQuestions}}</p>
+                        <p>Correct Attempts : {{performanceData.totalCorrect}}</p>
+                        <p>Wrong Attempts : {{performanceData.totalIncorrect}}</p>
+                        <p>Unattempted : {{performanceData.totalQuestions - performanceData.totalIncorrect - performanceData.totalCorrect}}</p>
+                    </div>
+                    <div class = "col-6">
+                        <p style="text-align: center;">Summary of Attempts</p>
+                        <div style="display: block" >
+                            <canvas mdbChart
+                                [chartType]="chartType"
+                                [datasets]="chartDatasets"
+                                [labels]="chartLabels"
+                                [colors]="chartColors"
+                                [options]="chartOptions"
+                                [legend]="true"
+                                (chartHover)="chartHovered($event)"
+                                (chartClick)="chartClicked($event)">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </mdb-card-body>
+      </mdb-card>
+      </div>
+
+      <div class="pt-4">
+        <mdb-card >
+            <mdb-card-header class="text-center">
+                Difficulty Level Analysis
+            </mdb-card-header>
+            <mdb-card-body>
+                <div class="container-fluid page-break-inside">
+	
+                    <h5>ASSESSMENT LEVEL ANALYSIS</h5>
+                    
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Difficulty Levels</th>
+                            <th>No. of Attempted questions</th>
+                            <th>Incorrect Attempts</th>
+                            <th>Correct Attempts</th>
+                            <th>Marks Scored</th>
+                        </tr>
+                        <ng-container *ngFor="let section of performanceData.sections">
+                        <tr class="">
+                            <td>{{section.name}}</td>
+                            <td>{{section.sectionCorrect + section.sectionIncorrect}}/{{section.sectionTotal}}</td>
+                            <td>{{section.sectionIncorrect}}/{{section.sectionTotal}}</td>
+                            <td>{{section.sectionCorrect}}/{{section.sectionTotal}}</td>
+                            <td>{{section.sectionMarks}}/{{section.sectionMarksTotal}}</td>
+                        </tr>
+                        </ng-container>
+                    </table>
+                
+                </div>
+                
+            </mdb-card-body>
+      </mdb-card>
+      </div>
+
+      <div class="pt-4">
+        <mdb-card >
+            <mdb-card-header class="text-center">
+                Topic-Wise Analysis
+            </mdb-card-header>
+            <mdb-card-body>
+                <div class="container-fluid page-break-inside">
+	
+                    <h5>SKILL LEVEL ANALYSIS</h5>
+                    
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Topic Names</th>
+                            <th>No. of Attempted questions</th>
+                            <th>Incorrect Attempts</th>
+                            <th>Correct Attempts</th>
+                            <th>Marks Scored</th>
+                        </tr>
+                        <ng-container *ngFor="let topic of performanceData.topics">
+                            <tr class="">
+                                <td>{{topic.name}}</td>
+                                <td>{{topic.topicCorrect + topic.topicIncorrect}}/{{topic.topicTotal}}</td>
+                                <td>{{topic.topicIncorrect}}/{{topic.topicTotal}}</td>
+                                <td>{{topic.topicCorrect}}/{{topic.topicTotal}}</td>
+                                <td>{{topic.topicMarks}}/{{topic.topicMarksTotal}}</td>
+                            </tr>
+                        </ng-container>
+                    </table>
+                
+                </div>
+                
+            </mdb-card-body>
+      </mdb-card>
+      </div>
+</div> <!-- /container -->

@@ -1,0 +1,42 @@
+
+  <div class="card cloudy-knoxville-gradient color-block">
+    <div class="container">
+      <div class="row pt-3">
+        <h5><b>Exam Start Time :</b> {{getExamDatetime()}}<br></h5>
+        <h5><b>Exam End Time   :</b> {{getExamEndDatetime()}}<br></h5>
+      </div>
+    </div>      
+    </div>
+
+  <br>
+
+<div class="container d-flex justify-content-center" >
+    <!-- Card -->
+<div class="card cloudy-knoxville-gradient color-block mb-3 mx-auto z-depth-1-half p-4" style="width: 30rem; text-align: center;" >
+
+  <!-- Card content -->
+  <div class="card-body">
+
+    <div *ngIf = (proceed()) >
+      <p class="mdb-card-text"> Click on Proceed Button</p>        
+    </div>
+    <div *ngIf = "beforeExamStartTime" >
+      <p class="mdb-card-text"> You can't proceed before scheduled exam time.</p>        
+    </div>
+
+    <div *ngIf = "afterExamEndTime" >
+      <p class="mdb-card-text"> The exam has already been conducted. </p>        
+    </div>
+    <button mdbBtn color="secondary" block="true" class="z-depth-0 my-4 waves-effect"
+    mdbWavesEffect [disabled]=(!proceed()) (click)="onSubmit()">Proceed</button>
+  </div>
+
+</div>
+<!-- Card -->
+
+</div>
+
+<footer class="bg-light py-4">
+  <div class="container justify-content-center"><div class="small text-center text-muted">Copyright © 2020 - NyKinSky | Technical Support - XXXXXXXXXX
+  </div></div>
+</footer>
